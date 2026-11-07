@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B1B33">
+<title>Seats Vs IP</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>html,body{margin:0;height:100%;background:#0B1B33;color:#fff;font:16px Arial,sans-serif}#m{height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}a{color:#E2B23C}</style>
+</head>
+<body>
+<div id="m">Loading Seats Vs IP…</div>
+<script>
+// Seats Vs IP loader: the app itself lives in Google Apps Script, so changes never need a GitHub upload.
+var API = 'https://script.google.com/macros/s/AKfycbwnyVsh2Ia_nQi0Yf-iSklImZL-xRAtby40CChOaFiTCZTdsSlLD8P9QyVQGfCRPsc/exec';
+function load() {
+  fetch(API + '?page=1&t=' + Date.now(), { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw 0; return r.text(); })
+    .then(function (h) { document.open(); document.write(h); document.close(); })
+    .catch(function () { document.getElementById('m').innerHTML = 'No connection.<br><br><a href="#" onclick="load();return false">Try again</a>'; });
+}
+load();
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
+</script>
+</body>
+</html>
